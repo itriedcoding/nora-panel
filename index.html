@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nora Panel - Advanced Admin Panel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="loading-text">
+                <h1>Nora Panel</h1>
+                <p>Advanced Admin Panel</p>
+            </div>
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Panel -->
+    <div id="mainPanel" class="panel hidden">
+        <!-- Header -->
+        <header class="panel-header">
+            <div class="header-left">
+                <div class="logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Nora Panel</span>
+                </div>
+                <div class="version">v1.0.0</div>
+            </div>
+            <div class="header-center">
+                <div class="server-info">
+                    <span class="server-name">FiveM Server</span>
+                    <span class="server-status online">
+                        <i class="fas fa-circle"></i>
+                        Online
+                    </span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="header-stats">
+                    <div class="stat">
+                        <i class="fas fa-users"></i>
+                        <span id="playerCount">0</span>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-car"></i>
+                        <span id="vehicleCount">0</span>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span id="serverFPS">0</span>
+                    </div>
+                </div>
+                <button class="close-btn" id="closePanel">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="panel-nav">
+            <div class="nav-items">
+                <a href="#dashboard" class="nav-item active" data-page="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#players" class="nav-item" data-page="players">
+                    <i class="fas fa-users"></i>
+                    <span>Players</span>
+                </a>
+                <a href="#vehicles" class="nav-item" data-page="vehicles">
+                    <i class="fas fa-car"></i>
+                    <span>Vehicles</span>
+                </a>
+                <a href="#weapons" class="nav-item" data-page="weapons">
+                    <i class="fas fa-gun"></i>
+                    <span>Weapons</span>
+                </a>
+                <a href="#teleport" class="nav-item" data-page="teleport">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Teleport</span>
+                </a>
+                <a href="#weather" class="nav-item" data-page="weather">
+                    <i class="fas fa-cloud-sun"></i>
+                    <span>Weather</span>
+                </a>
+                <a href="#economy" class="nav-item" data-page="economy">
+                    <i class="fas fa-dollar-sign"></i>
+                    <span>Economy</span>
+                </a>
+                <a href="#announcements" class="nav-item" data-page="announcements">
+                    <i class="fas fa-bullhorn"></i>
+                    <span>Announcements</span>
+                </a>
+                <a href="#logs" class="nav-item" data-page="logs">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Logs</span>
+                </a>
+                <a href="#backups" class="nav-item" data-page="backups">
+                    <i class="fas fa-database"></i>
+                    <span>Backups</span>
+                </a>
+                <a href="#performance" class="nav-item" data-page="performance">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Performance</span>
+                </a>
+                <a href="#security" class="nav-item" data-page="security">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Security</span>
+                </a>
+                <a href="#settings" class="nav-item" data-page="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="panel-content">
+            <!-- Dashboard Page -->
+            <div id="dashboard" class="page active">
+                <div class="page-header">
+                    <h1>Dashboard</h1>
+                    <p>Welcome to Nora Panel - Advanced Admin Panel</p>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <!-- Quick Stats -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Quick Stats</h3>
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <div class="stat-value" id="totalPlayers">0</div>
+                                    <div class="stat-label">Total Players</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value" id="onlinePlayers">0</div>
+                                    <div class="stat-label">Online Players</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value" id="totalBans">0</div>
+                                    <div class="stat-label">Total Bans</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value" id="totalKicks">0</div>
+                                    <div class="stat-label">Total Kicks</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Recent Activity</h3>
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="activity-list" id="recentActivity">
+                                <div class="activity-item">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-user-plus"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">Player Connected</div>
+                                        <div class="activity-description">John_Doe joined the server</div>
+                                        <div class="activity-time">2 minutes ago</div>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-ban"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">Player Banned</div>
+                                        <div class="activity-description">Cheater123 was banned by Admin</div>
+                                        <div class="activity-time">5 minutes ago</div>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-car"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">Vehicle Spawned</div>
+                                        <div class="activity-description">Admin spawned a vehicle</div>
+                                        <div class="activity-time">10 minutes ago</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Server Performance -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Server Performance</h3>
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="performance-metrics">
+                                <div class="metric">
+                                    <div class="metric-label">FPS</div>
+                                    <div class="metric-value" id="serverFPSValue">60</div>
+                                    <div class="metric-bar">
+                                        <div class="metric-fill" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-label">Ping</div>
+                                    <div class="metric-value" id="serverPingValue">50ms</div>
+                                    <div class="metric-bar">
+                                        <div class="metric-fill" style="width: 80%"></div>
+                                    </div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-label">Memory</div>
+                                    <div class="metric-value" id="serverMemoryValue">45%</div>
+                                    <div class="metric-bar">
+                                        <div class="metric-fill" style="width: 45%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Quick Actions</h3>
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="quick-actions">
+                                <button class="action-btn" id="quickHeal">
+                                    <i class="fas fa-heart"></i>
+                                    <span>Heal All</span>
+                                </button>
+                                <button class="action-btn" id="quickRevive">
+                                    <i class="fas fa-redo"></i>
+                                    <span>Revive All</span>
+                                </button>
+                                <button class="action-btn" id="quickWeather">
+                                    <i class="fas fa-sun"></i>
+                                    <span>Clear Weather</span>
+                                </button>
+                                <button class="action-btn" id="quickAnnounce">
+                                    <i class="fas fa-bullhorn"></i>
+                                    <span>Announce</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Players Page -->
+            <div id="players" class="page">
+                <div class="page-header">
+                    <h1>Player Management</h1>
+                    <p>Manage players, view stats, and perform actions</p>
+                </div>
+                
+                <div class="page-content">
+                    <div class="content-header">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="playerSearch" placeholder="Search players...">
+                        </div>
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" data-filter="all">All</button>
+                            <button class="filter-btn" data-filter="online">Online</button>
+                            <button class="filter-btn" data-filter="offline">Offline</button>
+                        </div>
+                    </div>
+                    
+                    <div class="players-table">
+                        <div class="table-header">
+                            <div class="table-cell">ID</div>
+                            <div class="table-cell">Name</div>
+                            <div class="table-cell">Ping</div>
+                            <div class="table-cell">Health</div>
+                            <div class="table-cell">Armor</div>
+                            <div class="table-cell">Money</div>
+                            <div class="table-cell">Job</div>
+                            <div class="table-cell">Actions</div>
+                        </div>
+                        <div class="table-body" id="playersTableBody">
+                            <!-- Players will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vehicles Page -->
+            <div id="vehicles" class="page">
+                <div class="page-header">
+                    <h1>Vehicle Management</h1>
+                    <p>Spawn, manage, and control vehicles</p>
+                </div>
+                
+                <div class="page-content">
+                    <div class="vehicle-controls">
+                        <div class="control-group">
+                            <label>Vehicle Model</label>
+                            <select id="vehicleModel">
+                                <option value="">Select a vehicle...</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label>Coordinates</label>
+                            <input type="text" id="vehicleCoords" placeholder="x, y, z">
+                        </div>
+                        <div class="control-group">
+                            <label>Heading</label>
+                            <input type="number" id="vehicleHeading" placeholder="0" min="0" max="360">
+                        </div>
+                        <button class="btn btn-primary" id="spawnVehicle">
+                            <i class="fas fa-plus"></i>
+                            Spawn Vehicle
+                        </button>
+                    </div>
+                    
+                    <div class="vehicles-list" id="vehiclesList">
+                        <!-- Vehicles will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weapons Page -->
+            <div id="weapons" class="page">
+                <div class="page-header">
+                    <h1>Weapon Management</h1>
+                    <p>Give weapons, manage ammo, and configure components</p>
+                </div>
+                
+                <div class="page-content">
+                    <div class="weapon-controls">
+                        <div class="control-group">
+                            <label>Weapon</label>
+                            <select id="weaponSelect">
+                                <option value="">Select a weapon...</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label>Ammo</label>
+                            <input type="number" id="weaponAmmo" placeholder="250" min="0" max="9999">
+                        </div>
+                        <button class="btn btn-primary" id="giveWeapon">
+                            <i class="fas fa-plus"></i>
+                            Give Weapon
+                        </button>
+                    </div>
+                    
+                    <div class="weapons-list" id="weaponsList">
+                        <!-- Weapons will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Teleport Page -->
+            <div id="teleport" class="page">
+                <div class="page-header">
+                    <h1>Teleport System</h1>
+                    <p>Teleport players and manage locations</p>
+                </div>
+                
+                <div class="page-content">
+                    <div class="teleport-controls">
+                        <div class="control-group">
+                            <label>Target Player</label>
+                            <select id="teleportTarget">
+                                <option value="">Select a player...</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label>Destination</label>
+                            <select id="teleportDestination">
+                                <option value="">Select destination...</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" id="teleportPlayer">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Teleport
+                        </button>
+                    </div>
+                    
+                    <div class="locations-grid">
+                        <div class="location-card">
+                            <h3>Predefined Locations</h3>
+                            <div class="locations-list" id="predefinedLocations">
+                                <!-- Locations will be populated here -->
+                            </div>
+                        </div>
+                        <div class="location-card">
+                            <h3>Saved Locations</h3>
+                            <div class="locations-list" id="savedLocations">
+                                <!-- Saved locations will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weather Page -->
+            <div id="weather" class="page">
+                <div class="page-header">
+                    <h1>Weather Control</h1>
+                    <p>Control weather, time, and environmental effects</p>
+                </div>
+                
+                <div class="page-content">
+                    <div class="weather-controls">
+                        <div class="control-group">
+                            <label>Weather Type</label>
+                            <select id="weatherType">
+                                <option value="">Select weather...</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label>Time</label>
+                            <input type="time" id="timeInput">
+                        </div>
+                        <div class="control-group">
+                            <label>Wind Speed</label>
+                            <input type="range" id="windSpeed" min="0" max="1" step="0.1">
+                        </div>
+                        <button class="btn btn-primary" id="setWeather">
+                            <i class="fas fa-cloud-sun"></i>
+                            Set Weather
+                        </button>
+                    </div>
+                    
+                    <div class="weather-presets">
+                        <h3>Weather Presets</h3>
+                        <div class="presets-grid" id="weatherPresets">
+                            <!-- Presets will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Economy Page -->
+            <div id="economy" class="page">
+                <div class="page-header">
+                    <h1>Economy System</h1>
+                    <p>Manage player money and economy</p>
+                </div>
+                
+                <div class="page-content">
+                    <div class="economy-stats">
+                        <div class="stat-card">
+                            <div class="stat-value" id="totalCash">$0</div>
+                            <div class="stat-label">Total Cash</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="totalBank">$0</div>
+                            <div class="stat-label">Total Bank</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="totalDirty">$0</div>
+                            <div class="stat-label">Total Dirty Money</div>
+                        </div>
+                    </div>
+                    
+                    <div class="economy-controls">
+                        <div class="control-group">
+                            <label>Target Player</label>
+                            <select id="economyTarget">
+                                <option value="">Select a player...</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label>Amount</label>
+                            <input type="number" id="economyAmount" placeholder="0" min="0">
+                        </div>
+                        <div class="control-group">
+                            <label>Account</label>
+                            <select id="economyAccount">
+                                <option value="cash">Cash</option>
+                                <option value="bank">Bank</option>
+                                <option value="dirty">Dirty Money</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" id="giveMoney">
+                            <i class="fas fa-plus"></i>
+                            Give Money
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Announcements Page -->
+            <div id="announcements" class="page">
+                <div class="page-header">
+                    <h1>Announcement System</h1>
+                    <p>Create and manage server announcements</p>
+                </div>
+                
+                <div class="page-content">
+                    <div class="announcement-form">
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" id="announcementTitle" placeholder="Enter announcement title...">
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea id="announcementMessage" placeholder="Enter announcement message..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Type</label>
+                            <select id="announcementType">
+                                <option value="info">Information</option>
+                                <option value="success">Success</option>
+                                <option value="warning">Warning</option>
+                                <option value="error">Error</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Target</label>
+                            <select id="announcementTarget">
+                                <option value="all">All Players</option>
+                                <option value="staff">Staff Only</option>
+                                <option value="online">Online Players</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" id="sendAnnouncement">
+                            <i class="fas fa-bullhorn"></i>
+                            Send Announcement
+                        </button>
+                    </div>
+                    
+                    <div class="announcements-list" id="announcementsList">
+                        <!-- Announcements will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logs Page -->
+            <div id="logs" class="page">
+                <div class="page-header">
+                    <h1>Log System</h1>
+                    <p>View and manage server logs</p>
+                </div>
+                
+                <div class="page-content">
+                    <div class="logs-controls">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="logSearch" placeholder="Search logs...">
+                        </div>
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" data-filter="all">All</button>
+                            <button class="filter-btn" data-filter="admin">Admin</button>
+                            <button class="filter-btn" data-filter="player">Player</button>
+                            <button class="filter-btn" data-filter="system">System</button>
+                        </div>
+                    </div>
+                    
+                    <div class="logs-table">
+                        <div class="table-header">
+                            <div class="table-cell">Time</div>
+                            <div class="table-cell">Type</div>
+                            <div class="table-cell">Action</div>
+                            <div class="table-cell">Player</div>
+                            <div class="table-cell">Admin</div>
+                            <div class="table-cell">Details</div>
+                        </div>
+                        <div class="table-body" id="logsTableBody">
+                            <!-- Logs will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Backups Page -->
+            <div id="backups" class="page">
+                <div class="page-header">
+                    <h1>Backup System</h1>
+                    <p>Create and manage server backups</p>
+                </div>
+                
+                <div class="page-content">
+                    <div class="backup-controls">
+                        <div class="control-group">
+                            <label>Backup Name</label>
+                            <input type="text" id="backupName" placeholder="Enter backup name...">
+                        </div>
+                        <div class="control-group">
+                            <label>Include Database</label>
+                            <input type="checkbox" id="includeDatabase" checked>
+                        </div>
+                        <div class="control-group">
+                            <label>Include Logs</label>
+                            <input type="checkbox" id="includeLogs" checked>
+                        </div>
+                        <div class="control-group">
+                            <label>Include Config</label>
+                            <input type="checkbox" id="includeConfig" checked>
+                        </div>
+                        <button class="btn btn-primary" id="createBackup">
+                            <i class="fas fa-database"></i>
+                            Create Backup
+                        </button>
+                    </div>
+                    
+                    <div class="backups-list" id="backupsList">
+                        <!-- Backups will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Page -->
+            <div id="performance" class="page">
+                <div class="page-header">
+                    <h1>Performance Monitor</h1>
+                    <p>Monitor server performance and statistics</p>
+                </div>
+                
+                <div class="page-content">
+                    <div class="performance-metrics">
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <h3>Server FPS</h3>
+                                <i class="fas fa-tachometer-alt"></i>
+                            </div>
+                            <div class="metric-value" id="fpsValue">60</div>
+                            <div class="metric-chart" id="fpsChart"></div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <h3>Server Ping</h3>
+                                <i class="fas fa-wifi"></i>
+                            </div>
+                            <div class="metric-value" id="pingValue">50ms</div>
+                            <div class="metric-chart" id="pingChart"></div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <h3>Memory Usage</h3>
+                                <i class="fas fa-memory"></i>
+                            </div>
+                            <div class="metric-value" id="memoryValue">45%</div>
+                            <div class="metric-chart" id="memoryChart"></div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <h3>CPU Usage</h3>
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <div class="metric-value" id="cpuValue">30%</div>
+                            <div class="metric-chart" id="cpuChart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Page -->
+            <div id="security" class="page">
+                <div class="page-header">
+                    <h1>Security System</h1>
+                    <p>Monitor security events and manage threats</p>
+                </div>
+                
+                <div class="page-content">
+                    <div class="security-stats">
+                        <div class="stat-card">
+                            <div class="stat-value" id="securityEvents">0</div>
+                            <div class="stat-label">Security Events</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="threatsBlocked">0</div>
+                            <div class="stat-label">Threats Blocked</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="suspiciousPlayers">0</div>
+                            <div class="stat-label">Suspicious Players</div>
+                        </div>
+                    </div>
+                    
+                    <div class="security-events" id="securityEventsList">
+                        <!-- Security events will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Page -->
+            <div id="settings" class="page">
+                <div class="page-header">
+                    <h1>Settings</h1>
+                    <p>Configure panel settings and preferences</p>
+                </div>
+                
+                <div class="page-content">
+                    <div class="settings-sections">
+                        <div class="settings-section">
+                            <h3>General Settings</h3>
+                            <div class="setting-item">
+                                <label>Panel Theme</label>
+                                <select id="panelTheme">
+                                    <option value="dark">Dark</option>
+                                    <option value="light">Light</option>
+                                </select>
+                            </div>
+                            <div class="setting-item">
+                                <label>Auto-refresh</label>
+                                <input type="checkbox" id="autoRefresh" checked>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-section">
+                            <h3>Notification Settings</h3>
+                            <div class="setting-item">
+                                <label>Enable Notifications</label>
+                                <input type="checkbox" id="enableNotifications" checked>
+                            </div>
+                            <div class="setting-item">
+                                <label>Notification Position</label>
+                                <select id="notificationPosition">
+                                    <option value="top-right">Top Right</option>
+                                    <option value="top-left">Top Left</option>
+                                    <option value="bottom-right">Bottom Right</option>
+                                    <option value="bottom-left">Bottom Left</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-section">
+                            <h3>Performance Settings</h3>
+                            <div class="setting-item">
+                                <label>Update Interval</label>
+                                <input type="number" id="updateInterval" value="1000" min="500" max="5000">
+                            </div>
+                            <div class="setting-item">
+                                <label>Enable Charts</label>
+                                <input type="checkbox" id="enableCharts" checked>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <!-- Modal Container -->
+    <div id="modalContainer" class="modal-container"></div>
+
+    <!-- Scripts -->
+    <script src="js/utils.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
